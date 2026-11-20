@@ -1,0 +1,14 @@
+{
+  "id": "hcsr04",
+  "nombre": "Sensor ultrasónico HC-SR04",
+  "descripcion": "Mide la distancia a un objeto con sonido: de 2 cm a unos 4 m. Sirve para robots que esquivan obstáculos, medir el nivel de un tanque o un timbre de proximidad.",
+  "categoria": "Sensores",
+  "version": "1.0.0",
+  "archivos": ["hcsr04.py"],
+  "catalogo": {
+    "modulos": { "hcsr04": { "HCSR04": "clase" } },
+    "clases": { "HCSR04": { "metodos": ["distancia_cm", "distancia_mm"], "constantes": [] } }
+  },
+  "ejemplo": "from hcsr04 import HCSR04\nfrom time import sleep_ms\n\nsensor = HCSR04(trig=5, echo=18)\n\ndef loop():\n    global distancia\n    cm = sensor.distancia_cm()\n    if cm is not None:\n        distancia = cm\n    sleep_ms(100)\n",
+  "notas": "El ECHO del HC-SR04 saca 5 V: usa un divisor de voltaje (1 kΩ + 2 kΩ) hacia el pin de la placa, o un sensor de 3,3 V."
+}
