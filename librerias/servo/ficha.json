@@ -1,0 +1,14 @@
+{
+  "id": "servo",
+  "nombre": "Servomotor (SG90, MG90S…)",
+  "descripcion": "Mueve un servo a un ángulo de 0 a 180 grados con una sola línea. Sirve para brazos, puertas, mirar a un lado u otro y mecanismos que giran hasta una posición.",
+  "categoria": "Actuadores",
+  "version": "1.0.0",
+  "archivos": ["servo.py"],
+  "catalogo": {
+    "modulos": { "servo": { "Servo": "clase" } },
+    "clases": { "Servo": { "metodos": ["angulo", "pulso_us", "leer", "apagar"], "constantes": [] } }
+  },
+  "ejemplo": "from servo import Servo\nfrom time import sleep_ms\n\nservo = Servo(pin=13)\n\ndef loop():\n    servo.angulo(0)\n    sleep_ms(1000)\n    servo.angulo(180)\n    sleep_ms(1000)\n",
+  "notas": "Alimenta el servo con 5 V aparte si es grande (el USB no alcanza) y une su GND con el de la placa."
+}
