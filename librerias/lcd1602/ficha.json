@@ -1,0 +1,14 @@
+{
+  "id": "lcd1602",
+  "nombre": "Pantalla LCD 1602 / 2004 (I2C)",
+  "descripcion": "Escribe texto en una pantalla LCD de 16x2 o 20x4 con la mochila I2C (PCF8574). Solo usa dos cables de datos.",
+  "categoria": "Pantallas",
+  "version": "1.0.0",
+  "archivos": ["lcd1602.py"],
+  "catalogo": {
+    "modulos": { "lcd1602": { "LCD1602": "clase" } },
+    "clases": { "LCD1602": { "metodos": ["escribir", "linea", "limpiar", "cursor", "luz", "cursor_visible"], "constantes": [] } }
+  },
+  "ejemplo": "from machine import I2C, Pin\nfrom lcd1602 import LCD1602\n\ni2c = I2C(0, sda=Pin(21), scl=Pin(22))\nlcd = LCD1602(i2c)\nlcd.linea(0, \"Hola mundo\")\n\ndef loop():\n    lcd.linea(1, \"Valor: \" + str(contador))\n",
+  "notas": "La direccion suele ser 0x27 o 0x3F: si no se ve nada, prueba la otra o ajusta el contraste con el tornillo azul de atras. Para 20x4 usa LCD1602(i2c, 0x27, 20, 4)."
+}

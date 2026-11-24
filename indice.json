@@ -33,6 +33,74 @@
       }
     },
     {
+      "id": "lcd1602",
+      "nombre": "Pantalla LCD 1602 / 2004 (I2C)",
+      "descripcion": "Escribe texto en una pantalla LCD de 16x2 o 20x4 con la mochila I2C (PCF8574). Solo usa dos cables de datos.",
+      "categoria": "Pantallas",
+      "version": "1.0.0",
+      "archivos": [
+        "lcd1602.py"
+      ],
+      "catalogo": {
+        "modulos": {
+          "lcd1602": {
+            "LCD1602": "clase"
+          }
+        },
+        "clases": {
+          "LCD1602": {
+            "metodos": [
+              "escribir",
+              "linea",
+              "limpiar",
+              "cursor",
+              "luz",
+              "cursor_visible"
+            ],
+            "constantes": []
+          }
+        }
+      },
+      "ejemplo": "from machine import I2C, Pin\nfrom lcd1602 import LCD1602\n\ni2c = I2C(0, sda=Pin(21), scl=Pin(22))\nlcd = LCD1602(i2c)\nlcd.linea(0, \"Hola mundo\")\n\ndef loop():\n    lcd.linea(1, \"Valor: \" + str(contador))\n",
+      "notas": "La direccion suele ser 0x27 o 0x3F: si no se ve nada, prueba la otra o ajusta el contraste con el tornillo azul de atras. Para 20x4 usa LCD1602(i2c, 0x27, 20, 4).",
+      "sha256": {
+        "lcd1602.py": "51b655c2175523725ef80c82d91c8cbfd1c27ce750ae710f0e3c5330edf88c9b"
+      }
+    },
+    {
+      "id": "mpu6050",
+      "nombre": "Acelerometro y giroscopio MPU6050",
+      "descripcion": "Lee aceleracion, giro, temperatura e inclinacion del modulo MPU6050 / GY-521 por I2C. Sirve para detectar movimiento, golpes y la inclinacion de un robot.",
+      "categoria": "Sensores",
+      "version": "1.0.0",
+      "archivos": [
+        "mpu6050.py"
+      ],
+      "catalogo": {
+        "modulos": {
+          "mpu6050": {
+            "MPU6050": "clase"
+          }
+        },
+        "clases": {
+          "MPU6050": {
+            "metodos": [
+              "aceleracion",
+              "giro",
+              "temperatura",
+              "inclinacion"
+            ],
+            "constantes": []
+          }
+        }
+      },
+      "ejemplo": "from machine import I2C, Pin\nfrom mpu6050 import MPU6050\n\ni2c = I2C(0, sda=Pin(21), scl=Pin(22))\nimu = MPU6050(i2c)\ncabeceo = 0\nalabeo = 0\n\ndef loop():\n    global cabeceo, alabeo\n    cabeceo, alabeo = imu.inclinacion()\n",
+      "notas": "Alimentalo a 3.3 V. La inclinacion solo es fiable con el modulo quieto; para girar de verdad usa giro().",
+      "sha256": {
+        "mpu6050.py": "0e5f92af229dddcfdd31a5f445150c4200ebf60e96b7be5ab781c60cc8b419ac"
+      }
+    },
+    {
       "id": "servo",
       "nombre": "Servomotor (SG90, MG90S…)",
       "descripcion": "Mueve un servo a un ángulo de 0 a 180 grados con una sola línea. Sirve para brazos, puertas, mirar a un lado u otro y mecanismos que giran hasta una posición.",
@@ -63,6 +131,45 @@
       "notas": "Alimenta el servo con 5 V aparte si es grande (el USB no alcanza) y une su GND con el de la placa.",
       "sha256": {
         "servo.py": "614bc6ca218870457a998e1e9b31829bd088b7a3f389d21ac9c3232fdc172971"
+      }
+    },
+    {
+      "id": "ssd1306",
+      "nombre": "Pantalla OLED SSD1306 (128x64 / 128x32)",
+      "descripcion": "Dibuja texto, lineas y rectangulos en una pantalla OLED pequena por I2C. Sirve para mostrar lecturas sin celular.",
+      "categoria": "Pantallas",
+      "version": "1.0.0",
+      "archivos": [
+        "ssd1306.py"
+      ],
+      "catalogo": {
+        "modulos": {
+          "ssd1306": {
+            "SSD1306": "clase"
+          }
+        },
+        "clases": {
+          "SSD1306": {
+            "metodos": [
+              "texto",
+              "pixel",
+              "linea",
+              "rect",
+              "limpiar",
+              "mostrar",
+              "contraste",
+              "invertir",
+              "apagar",
+              "encender"
+            ],
+            "constantes": []
+          }
+        }
+      },
+      "ejemplo": "from machine import I2C, Pin\nfrom ssd1306 import SSD1306\n\ni2c = I2C(0, sda=Pin(21), scl=Pin(22))\noled = SSD1306(i2c)\n\ndef loop():\n    oled.limpiar()\n    oled.texto(\"Valor: \" + str(contador), 0, 0)\n    oled.mostrar()\n",
+      "notas": "Si no se ve nada prueba la direccion 0x3D. Para la de 128x32 usa SSD1306(i2c, 128, 32). Nada se ve hasta llamar a mostrar().",
+      "sha256": {
+        "ssd1306.py": "0e1d8444385110a69f20b67d76ffed3314aa0e9795ac60d39d3de98784246501"
       }
     }
   ]

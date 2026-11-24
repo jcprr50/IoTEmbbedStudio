@@ -1,0 +1,14 @@
+{
+  "id": "ssd1306",
+  "nombre": "Pantalla OLED SSD1306 (128x64 / 128x32)",
+  "descripcion": "Dibuja texto, lineas y rectangulos en una pantalla OLED pequena por I2C. Sirve para mostrar lecturas sin celular.",
+  "categoria": "Pantallas",
+  "version": "1.0.0",
+  "archivos": ["ssd1306.py"],
+  "catalogo": {
+    "modulos": { "ssd1306": { "SSD1306": "clase" } },
+    "clases": { "SSD1306": { "metodos": ["texto", "pixel", "linea", "rect", "limpiar", "mostrar", "contraste", "invertir", "apagar", "encender"], "constantes": [] } }
+  },
+  "ejemplo": "from machine import I2C, Pin\nfrom ssd1306 import SSD1306\n\ni2c = I2C(0, sda=Pin(21), scl=Pin(22))\noled = SSD1306(i2c)\n\ndef loop():\n    oled.limpiar()\n    oled.texto(\"Valor: \" + str(contador), 0, 0)\n    oled.mostrar()\n",
+  "notas": "Si no se ve nada prueba la direccion 0x3D. Para la de 128x32 usa SSD1306(i2c, 128, 32). Nada se ve hasta llamar a mostrar()."
+}

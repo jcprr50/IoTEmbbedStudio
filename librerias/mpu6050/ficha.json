@@ -1,0 +1,14 @@
+{
+  "id": "mpu6050",
+  "nombre": "Acelerometro y giroscopio MPU6050",
+  "descripcion": "Lee aceleracion, giro, temperatura e inclinacion del modulo MPU6050 / GY-521 por I2C. Sirve para detectar movimiento, golpes y la inclinacion de un robot.",
+  "categoria": "Sensores",
+  "version": "1.0.0",
+  "archivos": ["mpu6050.py"],
+  "catalogo": {
+    "modulos": { "mpu6050": { "MPU6050": "clase" } },
+    "clases": { "MPU6050": { "metodos": ["aceleracion", "giro", "temperatura", "inclinacion"], "constantes": [] } }
+  },
+  "ejemplo": "from machine import I2C, Pin\nfrom mpu6050 import MPU6050\n\ni2c = I2C(0, sda=Pin(21), scl=Pin(22))\nimu = MPU6050(i2c)\ncabeceo = 0\nalabeo = 0\n\ndef loop():\n    global cabeceo, alabeo\n    cabeceo, alabeo = imu.inclinacion()\n",
+  "notas": "Alimentalo a 3.3 V. La inclinacion solo es fiable con el modulo quieto; para girar de verdad usa giro()."
+}
